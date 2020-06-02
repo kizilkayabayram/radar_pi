@@ -24,6 +24,10 @@ SET(OCPN_MIN_VERSION "ov50")
 
 INCLUDE("cmake/PluginConfigure.cmake")
 
+set(BOOST_ROOT /opt/boost)
+set(Boost_USE_STATIC_LIBS ON)
+find_package(Boost 1.65 REQUIRED COMPONENTS system)
+
 # For convenience we define the sources as a variable. You can add
 # header files and cpp/c files and CMake will sort them out
 
@@ -162,8 +166,10 @@ SET(SRC_JSON
 INCLUDE_DIRECTORIES(src/nmea0183)
 INCLUDE_DIRECTORIES(src/wxJSON)
 INCLUDE_DIRECTORIES(src)
+include_directories(${Boost_INCLUDE_DIR})
 
-ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_RADAR} ${SRC_NMEA0183} ${SRC_JSON} ${SRC_EMULATOR} ${SRC_GARMIN_HD} ${SRC_GARMIN_XHD} ${SRC_NAVICO})
+
+ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_RADAR} ${SRC_NMEA0183} ${SRC_JSON} ${SRC_EMULATOR} ${SRC_GARMIN_HD} ${SRC_GARMIN_XHD} ${SRC_NAVICO} ${Boost_LIBRARIES})
 
 
 INCLUDE("cmake/PluginInstall.cmake")
