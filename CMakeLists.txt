@@ -82,6 +82,8 @@ SET(SRC_NAVICO
             src/navico/NavicoLocate.cpp
             src/navico/NavicoLocate.h
             src/navico/NavicoRadarInfo.h
+            src/navico/new_socket.cpp
+            src/navico/new_socket.h
 )
 
 SET(SRC_RADAR

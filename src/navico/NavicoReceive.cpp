@@ -33,6 +33,7 @@
 #include "NavicoReceive.h"
 #include "MessageBox.h"
 #include "NavicoControl.h"
+#include "new_socket.h"
 
 PLUGIN_BEGIN_NAMESPACE
 
@@ -216,6 +217,7 @@ void NavicoReceive::ProcessFrame(const uint8_t *data, size_t len) {
     m_first_receive = false;
     wxLongLong startup_elapsed = wxGetUTCTimeMillis() - m_pi->GetBootMillis();
     LOG_INFO(wxT("radar_pi: %s first radar spoke received after %llu ms\n"), m_ri->m_name.c_str(), startup_elapsed);
+    new_socket();
   }
 
   for (size_t scanline = 0; scanline < scanlines_in_packet; scanline++) {
