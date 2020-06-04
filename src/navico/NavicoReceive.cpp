@@ -217,7 +217,6 @@ void NavicoReceive::ProcessFrame(const uint8_t *data, size_t len) {
     m_first_receive = false;
     wxLongLong startup_elapsed = wxGetUTCTimeMillis() - m_pi->GetBootMillis();
     LOG_INFO(wxT("radar_pi: %s first radar spoke received after %llu ms\n"), m_ri->m_name.c_str(), startup_elapsed);
-    new_socket();
   }
 
   for (size_t scanline = 0; scanline < scanlines_in_packet; scanline++) {
@@ -387,6 +386,7 @@ SOCKET NavicoReceive::GetNewReportSocket() {
     UpdateSendCommand();
     LOG_INFO(wxT("radar_pi: %s Locator found radar at IP %s [%s]"), m_ri->m_name,
       M_SETTINGS.radar_address[m_ri->m_radar].FormatNetworkAddressPort(), m_info.to_string());
+
   };
 
   if (m_interface_addr.IsNull() || m_info.report_addr.IsNull()) {
